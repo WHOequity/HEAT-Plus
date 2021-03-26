@@ -1,0 +1,42 @@
+Package: heatplus
+Title: WHO HEAT Plus Application
+Version: 0.2.0
+Authors@R: c(
+   person("Zev", "Ross", role = c("aut", "cre"), email = "zev@zevross.com"),
+   person("Ahmadreza", "Hosseinpoor", role = c("aut", "ctb")), 
+   person("Anne", "Schlotheuber", role = c("aut", "ctb")), 
+   person("Nate", "Teetor", role = "ctb", email = "nate@zevross.com"),
+   person(family = "World Health Organization", role = "cph")
+   )
+Description: Enables the exploration and comparison of within-country health 
+   inequalities.
+License: GPL-2 | file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.0.2
+Remotes:
+   WHOequity/HEAT,
+   WHOequity/HEAT-Data,
+   WHOequity/HEAT-Measures,
+   johncoene/waiter
+Imports:
+   shiny (<= 1.4.0),
+   yonder (<= 0.2.0),
+   highcharter (<= 0.7.0.9000),
+   waiter,
+   config,
+   glue,
+   httr,
+   fs,
+   processx,
+   jsonlite,
+   readxl,
+   readr,
+   heat,
+   heatdata,
+   heatmeasures,
+   AzureAuth (> 1.2.2),
+   AzureGraph (> 1.0.5)
+Depends:
+   heat

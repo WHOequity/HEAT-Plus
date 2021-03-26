@@ -1,0 +1,43 @@
+.active-green .active,
+.btn-green {
+  background-color: #B5E61C !important;
+  border-color: #B5E61C !important;
+  /* color: #236a88 !important; */
+}
+
+.active-green .active:focus,
+.btn-green:focus {
+  box-shadow: 0 0 0 .2rem rgba(181, 230, 28, 0.5) !important;
+}
+
+.btn-teal {
+  background-color: #28B252 !important;
+  border-color: #28B252 !important;
+}
+
+.text-green {
+  color: #b5e61c !important;
+}
+
+.toast {
+  background-color: rgba(255,255,255,.99);
+}
+
+#app-pane_home h1:first-child {
+  color: #008dc9;
+  text-shadow: 1px 1px rgb(34, 177, 76);
+}
+
+#app-pane_home h1:nth-child(2) {
+  color: rgb(34, 177, 76);
+  text-shadow: 1px 1px #008dc9;
+}
+
+.btn-link {
+  line-height: inherit;
+  font-size: inherit;
+}
+
+.tooltip {
+  z-index: 9070 !important;
+}
