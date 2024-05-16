@@ -41,3 +41,20 @@
 .tooltip {
   z-index: 9070 !important;
 }
+
+#dm-manage{
+  color: white !important;
+  background-color: #B5E61C !important;
+  outline: 2px solid #b6b6b6;
+  margin-left: 10px;
+  color: #fff;
+  font-size: 0.8em;
+  font-weight: bold;
+}
+
+.upload-note{
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  font-size: 0.9em;
+}

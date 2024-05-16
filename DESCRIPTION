@@ -21,9 +21,9 @@ Remotes:
    WHOequity/HEAT-Measures,
    johncoene/waiter
 Imports:
-   shiny (<= 1.4.0),
-   yonder (<= 0.2.0),
-   highcharter (<= 0.7.0.9000),
+   shiny,
+   yonder,
+   highcharter,
    waiter,
    config,
    glue,
@@ -36,7 +36,7 @@ Imports:
    heat,
    heatdata,
    heatmeasures,
-   AzureAuth (> 1.2.2),
-   AzureGraph (> 1.0.5)
+   AzureAuth,
+   AzureGraph
 Depends:
    heat

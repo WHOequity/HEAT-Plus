@@ -18,6 +18,7 @@
 
 .onLoad <- function(pkg, lib) {
   shiny::addResourcePath("heatplus-assets", system.file("www", package = "heatplus"))
+  shiny::addResourcePath("heat-assets", system.file("www", package = "heat"))
   # shiny::addResourcePath("heatplus-landing-page", system.file("landing-page", package = "heatplus"))
   
   if (getOption("heat.plus.portable", FALSE)) {

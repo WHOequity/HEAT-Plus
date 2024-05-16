@@ -29,11 +29,11 @@ local_dir_exists <- function(dir) {
 }
 
 local_dir_init <- function(dir) {
-  dir_create(path(local_storage(), dir))
+  try(dir_create(path(local_storage(), dir)), silent = TRUE)
 }
 
 local_dir_create_record <- function(dir, name) {
-  dir_create(path(local_storage(), dir, name))
+  try(dir_create(path(local_storage(), dir, name)), silent = TRUE)
 }
 
 local_dir_delete_record <- function(dir, name) {
@@ -96,6 +96,7 @@ local_dir_list_records <- function(dir) {
     return(NULL)
   }
   
+
   path(local_storage(), dir) %>% 
     dir_info(recurse = FALSE) %>% 
     dplyr::arrange(dplyr::desc(birth_time)) %>% 

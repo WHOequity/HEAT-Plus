@@ -34,6 +34,7 @@ heatPlusApp <- function(launch.browser = TRUE, port = NA) {
   
   port <- ifelse(is.na(port), as.numeric(config::get(c("shiny", "PORT"))), port)
 
+  message("The port is: ", port)
   
   options(
     # shiny.launch.browser = interactive(),
@@ -41,7 +42,7 @@ heatPlusApp <- function(launch.browser = TRUE, port = NA) {
     shiny.port = port,
     shiny.maxRequestSize = 100 * 1024^2,
     shiny.fullstacktrace = !is_portable() && interactive(),
-    
+    shiny.host = '0.0.0.0',
     heat.plus = TRUE
   )
   
@@ -57,7 +58,7 @@ heatPlusUI <- function() {
     
     list(
       waiter::use_waiter(),
-      htmltools::htmlDependencies(highchartOutput(NULL)),
+      #htmltools::htmlDependencies(highchartOutput(NULL)),
       tags$head(
         heat::locales(),
         heat::assets(),
@@ -65,8 +66,8 @@ heatPlusUI <- function() {
       ),
       waiter::waiter_show_on_load(
         html = loading_screen(qs[["code"]]),
-        color = "#008dc9",
-        logo = "heat-assets/img/who-logo-white.png"
+        color = "#008dc9"#,
+        # logo = "heat-assets/img/who-logo-white.png"
       ),
       heatUI(
         id = "heatplus",
@@ -80,7 +81,8 @@ heatPlusUI <- function() {
 heatPlusServer <- function() {
   function(input, output, session) {
     qs <- isolate(shiny::parseQueryString(session$clientData$url_search))
-    
+
+
     r_lang <- reactive({
       input$lang
     })
@@ -107,7 +109,6 @@ heatPlusServer <- function() {
       )
     })
     
-
     callModule(
       heat::heatServer, "heatplus",
       Data = m_data_management,
@@ -124,6 +125,7 @@ heatPlusServer <- function() {
     
     if (!is.null(qs$code) || is_portable()) {
       session$onFlushed(function() {
+ 
         waiter::waiter_hide()
         showModal(heat:::licenseModal())
       })

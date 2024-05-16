@@ -74,12 +74,19 @@ read_data <- function(path) {
     return(NA)
   }
   
-  switch(
+
+  dat <- switch(
     ext,
     xls = readxl::read_xls(path, progress = FALSE, guess_max = 21474836),
     xlsx = readxl::read_xlsx(path, progress = FALSE, guess_max = 21474836),
     NA
   )
+  
+  # per git577, git880
+  names(dat)[names(dat) == "date"] <- "year"
+  names(dat)[names(dat) == "note"] <- "flag"
+  dat
+  
 }
 
 retrieve_data <- function(url) {
@@ -102,7 +109,8 @@ retrieve_data <- function(url) {
     measures = temp_env$data_measures,
     country_info = temp_env$data_country_info,
     strata = temp_env$data_strata,
-    setting_yr_src = temp_env$data_setting_years
+    setting_yr_src = temp_env$data_setting_years,
+    info_date_to_integer = temp_env$info_date_to_integer
   )
 }
 

@@ -1,5 +1,5 @@
 <!--
-© Copyright World Health Organization (WHO) 2016-2021.
+© Copyright World Health Organization (WHO) 2016-2024.
 This file is part of the WHO Health Equity Assessment Toolkit 
 (HEAT and HEAT Plus), a software application for assessing 
 health inequalities in countries.
@@ -23,10 +23,72 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 <p>&nbsp;</p>
 
-<p><strong>April 2021 - Version 4.0</strong></p>
+<p><strong>April 2024 - HEAT and HEAT Plus version 6.0</strong></p>
+<ul>
+	<li>Integration of two additional datasets from the WHO Health Inequality Data Repository into HEAT, enabling the exploration of over 52 datasets.</li>
+	<li>Integration of web-based documents in HEAT, including </li>
+	<ul>
+		<li>User manual</li>
+		<li>Technical notes</li>
+	</ul>
+	<li>Addition of a new component "Determinants", that allows for the comparison of selected health indicators with determinant indicators from the Social Determinants of Health Equity Framework (2024). Data can be explored in two tabs (graph and table). </li>
+	<li>Integration of revised/updated codes for the calculation of summary measures of health inequality: </li>
+	<ul>
+		<li>Estimation of summary estimate and 95% confidence intervals of SII and RII. </li>
+		<li>Adding 1x10-6 to estimates equal to 0 for MLD and TI.</li>
+		<li>New option to use reported setting average rather than calculate weighted average for IDISU, MDMU, PAF and PAR.</li>
+		<li>New calculation of standard error for PAF and PAR.</li>
+		<li>Calculation of 95% confidence intervals using random draws from normal distributions for MDMU, MDMW, MDBU, MDBW, MDRU, MDRW, IDISU, IDISW, COV and BGSD.</li>
+	</ul>
+	<li>Incorporation of two new summary measures: Mean Difference from Reference Group - unweighted (MDRU) and Mean Difference from Reference Group - weighted (MDRW). </li>
+	<li>Several other fixes to software functionality.</li>
+</ul>
+
+<p>&nbsp;</p>
+
+<p><strong>April 2023 - HEAT and HEAT Plus version 5.0</strong></p>
+<ul>
+	<li>Integration of the WHO Health Inequality Data Repository into HEAT, enabling the exploration of over 50 datasets</li>
+	<li>Integration of tutorials and trainings, including</li>
+	<ul>
+		<li>A link to an introductory tutorial video in HEAT, available via the new "Choose dataset" window</li>
+		<li>A link to an eLearning course for HEAT and HEAT Plus, available via a new "Training" page under "About"</li>
+	</ul>
+	<li>Addition of new features:</li>
+	<ul>
+		<li>Improved date selector, allowing for the use of different date formats as well as the ability to quickly remove or add all available dates</li>
+		<li>Improved benchmarks feature, allowing for custom date ranges when comparing data across settings</li>
+		<li>Increased maximum indicator selection in the horizontal bar chart under "Explore Inequality > Disaggregated data"</li>
+		<li>Addition of median lines to the scatterplot under "Compare inequality > Summary measures"</li>
+		<li>Incorporation of interpretation for difference and ratio summary measures into axes labels and tooltips</li>
+		<li>Addition of new maps under "Explore Inequality > Disaggregated data" for select datasets with available data</li>
+		<li>Greying out of dates and inequality dimensions in the selection menu where data are not available</li>
+	</ul>	
+	<li>Several other fixes to software functionality</li>
+</li>
+</ul>
+
+<p>&nbsp;</p>
+
+<p><strong>June 2022 - HEAT version 4.0</strong></p>
+<ul>
+	<li>Update of the built-in reproductive, maternal, newborn and child health dataset of the WHO Health Inequality Monitor data repository in HEAT (2022 update). (Note: previously referred to as the Health Equity Monitor database)</li>
+</ul>
+
+<p>&nbsp;</p>
+
+<p><strong>October 2021 - HEAT version 4.0</strong></p>
+<ul>
+	<li>Update of the built-in Health Equity Monitor database in HEAT (2021 update).</li>
+</ul>
+
+<p>&nbsp;</p>
+
+<p><strong>April 2021 - HEAT and HEAT Plus version 4.0</strong></p>
 <ul>
 	<li>Desktop versions for Windows and Macintosh developed</li>
 	<li>Translation of the interface into French, Portuguese and Spanish</li>
+	<li>Addition of new maps</li>
 	<li>Correction to summary measure formulas:</li>
 	<ul>
 		<li>Correct use of reference subgroup in the calculation of MDBU and MDBW</li>
@@ -36,9 +98,10 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 <p>&nbsp;</p>
 
-<p><strong>April 2020 - Version 3.0 (beta)</strong></p>
+<p><strong>July 2020 - HEAT version 4.0 (beta) and HEAT Plus version 3.0 (beta)</strong></p>
 <ul>
-	<li>The source code has been completely restructured to improve perform. This included dividing the application into four R packages: heat, heatplus, heatdata, and heatmeasures. These packages handle validating and bundling the built-in database in HEAT and uploaded databases in HEAT Plus, generating interactive charts within the application and static charts for download, and contain all the modules used to build and run HEAT and HEAT Plus.</li>
+	<li>Update of the built-in Health Equity Monitor database in HEAT (2020 update).</li>
+	<li>The source code has been completely restructured to improve performance. This included dividing the application into four R packages: heat, heatplus, heatdata, and heatmeasures. These packages handle validating and bundling the built-in database in HEAT and uploaded databases in HEAT Plus, generating interactive charts within the application and static charts for download, and contain all the modules used to build and run HEAT and HEAT Plus.</li>
 	<li>The interface has been entirely redesigned to enhance user friendliness:</li>
 	<ul>
 		<li>The home page now allows users to vertically scroll through information</li>
@@ -54,15 +117,12 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 	</ul>
 	<li>New features have been added to allow for greater customization:</li>
 	<ul>
-		<li>A manage data modal has been added that enables users to upload, save, modify and delete datasets</li>
 		<li>Table views have been added for disaggregated data and summary measures under "Compare inequality"</li>
 		<li>Graph options now include the option to show/hide data labels, control the size of data labels and choose the number of decimals</li>
 		<li>Graph options for horizontal bar graphs showing disaggregated data under "Explore inequality" now include the option to show/hide 95% confidence intervals</li>
 		<li>Graphs options for scatterplots showing summary measures under "Compare inequality" now include the option to show data points as setting labels in addition to points or ISO3 labels and control the size of data labels</li>
 		<li>Benchmark options under "Compare inequality" now automatically select comparison settings given the chosen country income groups and WHO regions</li>
 	</ul>
-	<li>In addition to the downloadable desktop version, the online version of HEAT Plus has been developed, which is accessible on the web and allows users to securely login and safely upload and store their data online</li>
-	<li>A new data validation tool has been developed to facilitate the preparation of datasets for upload to HEAT Plus</li>
 	<li>Correction to summary measure formulas:</li>
 	<ul>
 		<li>Division of MDBU and MDMU by number of observations (n)</li>
@@ -73,15 +133,23 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 <p>&nbsp;</p>
 
-<p><strong>December 2018 - Version 2.0</strong></p>
+<p><strong>July 2019 - HEAT version 3.1</strong></p>
+<ul>
+	<li>Update of the built-in Health Equity Monitor database in HEAT (2019 update).</li>
+</ul>
+
+<p>&nbsp;</p>
+
+<p><strong>December 2018 - HEAT version 3.0 and HEAT Plus version 2.0</strong></p>
 <ul>
 	<li>Incorporation of interactive visuals (replacing static graphs).</li>
 	<li>Incorporation of a translation feature.</li>
+	<li>Addition of a new tab under "Explore inequality" featuring maps.</li>
 	<li>Calculation of additional summary measures of inequality for non-ordered dimensions, including</li>
 	<ul>
 		<li>Between-group standard deviation (BGSD),</li>
 		<li>Coefficient of variation (COV),</li>
-		<li>Unweighted mean differnce from best performing subgroup (MDBU),</li>
+		<li>Unweighted mean difference from best performing subgroup (MDBU),</li>
 		<li>Unweighted mean difference from mean (MDMU).</li>
 	</ul>
 	<li>Revision of summary measure formulas for</li>
@@ -95,21 +163,21 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 		<ul>
 			<li>Difference between percentile 80 and percentile 20,</li>
 			<li>Ratio of percentile 80 to percentile 20,</li>
-			<li>Differnce between the mean estimates in quintile 5 and quintile 1,</li>
+			<li>Difference between the mean estimates in quintile 5 and quintile 1,</li>
 			<li>Ratio of the mean estimates in quintile 5 to quintile 1.</li>
 		</ul>
 		<li>60 subgroups:</li>
 		<ul>
 			<li>Difference between percentile 90 and percentile 10,</li>
 			<li>Ratio of percentile 90 to percentile 10,</li>
-			<li>Differnce between the mean estimates in decile 10 and decile 1,</li>
+			<li>Difference between the mean estimates in decile 10 and decile 1,</li>
 			<li>Ratio of the mean estimates in decile 10 to decile 1.</li>
 		</ul>
 		<li>100 subgroups:</li>
 		<ul>
 			<li>Difference between percentile 95 and percentile 5,</li>
 			<li>Ratio of percentile 95 to percentile 5,</li>
-			<li>Differnce between the mean estimates in the top 5% and the bottom 5%,</li>
+			<li>Difference between the mean estimates in the top 5% and the bottom 5%,</li>
 			<li>Ratio of the mean estimates in the top 5% to the bottom 5%.</li>
 		</ul>
 	</ul>
@@ -117,9 +185,53 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 <p>&nbsp;</p>
 
-<p><strong>July 2017 - Version 1.0</strong></p>
+<p><strong>February 2018 - HEAT version 2.1</strong></p>
 <ul>
-	<li>Initial public release.</li>
+	<li>Update of the built-in Health Equity Monitor database in HEAT (2018 update).</li>
+</ul>
+
+<p>&nbsp;</p>
+
+<p><strong>July 2017 - HEAT version 2.0 and HEAT Plus version 1.0</strong></p>
+<ul>
+	<li>Initial public release of HEAT</li>
+	<li>Restructuring of source code for improved performance, including</li>
+	<ul>
+		<li>Improving the cascade of user selections to minimize plot redrawing, and</li>
+		<li>Pre-calculating 95% confidence intervals of summary measures (instead of&nbsp;on the fly).</li>
+	</ul>
+	</li>
+	<li>Addition of a new tab under "Explore inequality" featuring detailed bar graphs.</li>
+	<li>Addition of accordion-style menus for graph options and table options.</li>
+	<li>Alteration of variable names in order to conform with the terminology used in HEAT Plus, including
+	<ul>
+		<li>Changing &lsquo;country&rsquo; to &lsquo;setting&rsquo;, and</li>
+		<li>Changing &lsquo;national average&rsquo; to &lsquo;setting average&rsquo;.</li>
+	</ul>
+	</li>
+	<li>Revision of summary measures of inequality, including
+	<ul>
+		<li>Dropping the previous Relative Index of Inequality (RII),</li>
+		<li>Renaming the previous Kunst-Mackenbach Index (KMI) to Relative Index of Inequality (RII),</li>
+		<li>Revising the formulas for the Slope Index of Inequality (SII) and the Relative Index of Inequality (RII), both for the estimate and analytic 95% confidence intervals,</li>
+		<li>Adding the Weighted Index of Disparity (IDIS_W),</li>
+		<li>Dropping the bootstrap 95% confidence intervals,</li>
+		<li>Adding the simulation-based 95% confidence intervals for the Index of Disparity (IDIS), Mean Difference from Mean (MDM), Mean Difference from Best-Performing Subgroup (MDB) and Weighted Index of Disparity (IDIS_W),</li>
+		<li>Calculating the average as the weighted average based on the estimate and population size.</li>
+	</ul>
+	</li>
+</ul>
+
+<p>&nbsp;</p>
+
+<p><strong>January 2017 - HEAT version 1.1</strong></p>
+<ul>
+	<li>Update of the built-in Health Equity Monitor database in HEAT (2016 update).</li>
+</ul>
+<p>&nbsp;</p>
+<p><strong>May 2016 - HEAT version 1.0</strong></p>
+<ul>
+	<li>Initial public release of HEAT.</li>
 </ul>
 
 </div>

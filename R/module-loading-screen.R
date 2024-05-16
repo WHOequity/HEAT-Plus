@@ -28,6 +28,9 @@ loading_screen <- function(code) {
 
 loading_screen_redirect <- function() {
   div(
+    div(style="display: block; margin-left: auto; margin-right: auto; width: 30%",
+        img("heat-assets/img/who-logo-white.png")
+    ),
     d2("Health Equity Assessment Toolkit") %>% 
       font(color = "white"),
     d2("Plus") %>%
@@ -37,7 +40,7 @@ loading_screen_redirect <- function() {
       buttonInput(
         class = "btn-lg",
         id = NULL,
-        label = list("Login with Microsoft", shiny::icon("external-link")),
+        label = list("Login with Microsoft", shiny::icon("arrow-up-right-from-square")),
         onclick = HTML(glue::glue(
           "window.location.replace('{ azure_auth_uri() }')"
         ))
@@ -48,9 +51,11 @@ loading_screen_redirect <- function() {
       margin(top = -2)
   )
 }
-
 loading_screen_initialize <- function() {
   div(
+    div(style="display: block; margin-left: auto; margin-right: auto; width: 30%",
+        img("heat-assets/img/who-logo-white.png")
+    ),
     d2("Health Equity Assessment Toolkit") %>% 
       font(color = "white"),
     d2("Plus") %>%

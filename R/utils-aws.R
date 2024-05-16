@@ -32,10 +32,11 @@ dynamo_get <- function(user) {
     return(NULL)
   }
   
-  jsonlite::fromJSON(res$stdout, simplifyDataFrame = FALSE) %>% 
-    .$Items %>% 
-    dplyr::bind_rows() %>% 
-    tidyr::unnest()    
+
+  jsonlite::fromJSON(res$stdout, simplifyDataFrame = FALSE) %>%
+    .$Items %>%
+    dplyr::bind_rows() %>%
+    tidyr::unnest()
 }
 
 dynamo_put <- function(user, name, url, desc, size) {

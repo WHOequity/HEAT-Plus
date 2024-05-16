@@ -21,21 +21,25 @@ dataManagementDropdown <- function(id) {
   
   if (is_portable()) {
     return(
-      dropdown(
-        class = "mr-2",
-        align = "right",
-        label = span(
-          icon("user", class = "ml-1"),
-          span(
-            class = "heat-plus-management-dropdown__label"
-          )
-        ),
-        buttonInput(
-          id = ns("manage"),
-          label = div(i18n("manager.labels.managedata"))
-        )
-      )
+      # dropdown(
+      #   class = "mr-2",
+      #   align = "right",
+      #   label = span(
+      #     icon("user", class = "ml-1"),
+      #     span(
+      #       class = "heat-plus-management-dropdown__label"
+      #     )
+      #   ),
+        # buttonInput(
+        #   id = ns("manage"),
+        #   label = div(i18n("manager.labels.managedata"))
+        # )
+
+    #   )
+      actionButton(inputId = ns("manage"), 
+                   label = tags$span(i18n("manager.labels.managedata")))
     )
+
   }
   
   dropdown(
@@ -92,8 +96,8 @@ dataManagementRecord <- function(name, activate = FALSE) {
       class = "heat-plus-record__buttons",
       id = NULL,
       choices = list(
-        icon("pencil-alt"),
-        icon("trash-alt")
+        icon("pencil"),
+        icon("trash")
       ),
       values = c(
         "edit",
@@ -119,7 +123,7 @@ dataManagementModal <- function(ns, records, active = NULL, language = NULL) {
       label = list(
         h6(i18n("manager.labels.select")) %>% #Select database
           display("inline"),
-        icon("info-circle") %>% 
+        icon("circle-info") %>% 
           tagAppendAttributes(
             `data-toggle` = "tooltip",
             #
@@ -184,6 +188,7 @@ dataManagementModal <- function(ns, records, active = NULL, language = NULL) {
     ) %>% 
       background("green") %>% 
       margin(bottom = 2),
+    div(class = "upload-note", i18n("manager.uploads.note")),
     div(
       class = "progress heat-plus-management-progress",
       div(
@@ -228,7 +233,15 @@ dataManagementModal <- function(ns, records, active = NULL, language = NULL) {
       background("green")
   )
   
-  m <- tagAppendAttributes(m, class = "heat-plus-management-modal")
+  #m <- tagAppendAttributes(m, class = "heat-plus-management-modal")
+  
+  m <- tagAppendAttributes(
+    m,
+    class = "heat-plus-management-modal",
+    `data-backdrop` = "static",
+    `data-bs-keyboard` = "false",
+    `data-keyboard` = "false",
+  )
   
   m
 }
@@ -240,6 +253,8 @@ dataManagementServer <- function(input, output, session, auth,
     
     auth$user()
   })
+  
+
   
   r_user_id <- reactive({
     r_user()$id
@@ -260,7 +275,9 @@ dataManagementServer <- function(input, output, session, auth,
     dimensions = NULL,
     subregion_extrema = NULL,
     strata = NULL,
-    country_info = NULL
+    country_info = NULL,
+    info_date_to_integer = NULL
+    
   )
   
   # ├ utils ----
@@ -278,7 +295,7 @@ dataManagementServer <- function(input, output, session, auth,
   
   load_data <- function(data) {
     keys <- names(data)
-    
+
     for (i in seq_along(data)) {
       State[[keys[[i]]]] <- data[[i]]
     }
@@ -306,8 +323,6 @@ dataManagementServer <- function(input, output, session, auth,
   
   # ├ enable upload button ----
   observeEvent(input$new_database, {
-    print("# observeEvent(input$new_database) ----")
-    print(sprintf("  Date/Time: %s", Sys.time()))
     session$sendCustomMessage("heatplus:enable-upload", list())
   })
   
@@ -321,6 +336,7 @@ dataManagementServer <- function(input, output, session, auth,
     language = language
   )
   
+
   # │├ new record ----
   observeEvent(m_upload$record(), {
     req(
@@ -495,9 +511,9 @@ dataManagementServer <- function(input, output, session, auth,
   })
   
   # ├ download user manual file ----
-  output$user_manual <- downloadHandler("heat-plus-user-manul.pdf", function(f) {
+  output$user_manual <- downloadHandler("heat-plus-user-manual.pdf", function(f) {
     file_copy(
-      path_package("heatplus", "downloads", "user-manual.pdf"),
+      path_package("heatplus", "downloads", "User_manual.pdf"),
       f
     )  
   })
@@ -508,6 +524,7 @@ dataManagementServer <- function(input, output, session, auth,
     country_info = reactive(State$country_info),
     strata = reactive(State$strata),
     setting_yr_src = reactive(State$setting_yr_src),
+    date_to_integer = reactive(State$info_date_to_integer),
     delete_active = r_delete_active
   )
 }
@@ -516,7 +533,7 @@ dataUploadServer <- function(input, output, session,
                              r_user_id, r_begin, r_upload, r_save,
                              language) {
   httr::set_config(httr::config(http_version = 0))
-  
+
   ns <- session$ns
   
   State <- reactiveValues(
@@ -586,6 +603,7 @@ dataUploadServer <- function(input, output, session,
     
     if (local_dir_has_record(r_user_id(), record_name)) {
       msg_error(translate(c(lang, "manager", "warnings", "filename")))
+
       # paste(
       #   "Filename already exists",
       #   "<br/>",
@@ -596,6 +614,9 @@ dataUploadServer <- function(input, output, session,
   
     upload_data <- read_data(r_upload_path())
 
+    message("After upload number of R sessions is ", 
+            ps::ps() |> dplyr::filter(name == "R") |> nrow())
+    
     if (isTRUE(is.na(upload_data))) {
       msg_error(translate(c(lang, "manager", "warnings", "extension"))) #"Invalid file extension"
       return()
@@ -618,6 +639,7 @@ dataUploadServer <- function(input, output, session,
     }
     
     data_id <- heatmeasures::add_strata_id(upload_data)
+    
     
     data_heat <- data_id %>% 
       heatdata::HEAT_data_fixes("heat_data") %>% 
@@ -665,6 +687,9 @@ dataUploadServer <- function(input, output, session,
     # Creating summary measures
     data_measures <- heatmeasures::HEAT_measures_full_process(data_vars)
     
+    message("After processing number of R sessions is ", 
+            ps::ps() |> dplyr::filter(name == "R") |> nrow())
+    
     msg_progress(translate(c(lang, "manager", "uploads", "strata"))) 
     # Creating strata
     data_strata <- heatdata::HEAT_create_strata_table(data_vars)
@@ -679,6 +704,7 @@ dataUploadServer <- function(input, output, session,
     data_subregion_extrema <- heatdata::HEAT_create_subregionminmax_table(data_vars)
     
     # append colors to data_heat
+
     data_heat <- dplyr::left_join(
       data_vars, data_dimensions, 
       by = c("dimension", "subgroup", "subgroup_order")
@@ -686,12 +712,28 @@ dataUploadServer <- function(input, output, session,
 
     data_country_info <- HEATPlus_create_country_info(data_strata)
     
+
+    data_heat <- data_heat %>%
+      dplyr::mutate(
+        year_int = as.numeric(factor(year, levels = sort(unique(year))))
+      )
+    
+    info_date_to_integer <- data_heat %>%
+      dplyr::distinct(year, year_int) |> 
+      dplyr::arrange(year_int)
+    
+    data_measures <- dplyr::left_join(data_measures, info_date_to_integer, by = "year")
+    
+    
+    
     msg_progress(translate(c(lang, "manager", "uploads", "saving")))
     # Saving results
     
     # create new record folder under user folder
     local_dir_create_record(r_user_id(), record_name)
 
+
+    
     # save data frames as rds files in record
     set_data(record_name, list(
       main = data_heat, 
@@ -700,6 +742,7 @@ dataUploadServer <- function(input, output, session,
       dimensions = data_dimensions,
       subregion_extrema = data_subregion_extrema, 
       strata = data_strata, 
+      info_date_to_integer = info_date_to_integer,
       country_info = data_country_info
     ))
     
